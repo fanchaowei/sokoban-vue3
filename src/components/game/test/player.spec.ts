@@ -3,6 +3,7 @@ import { createPinia, setActivePinia } from 'pinia'
 import { useMove } from '../player/useMove'
 import { usePlayerStore } from '@/store/player'
 import { onMounted, onUnmounted } from 'vue'
+import { useMapStore } from '@/store/map'
 
 vi.mock('vue', async () => {
   const actual: any = await vi.importActual("vue")
@@ -17,6 +18,13 @@ vi.mock('vue', async () => {
 describe('play', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
+
+    const { setupMap } = useMapStore()
+    setupMap([
+      [2, 2, 2],
+      [2, 2, 2],
+      [2, 2, 2],
+    ])
 
     const { addKeyUpEvent } = useMove()
     onMounted(addKeyUpEvent)
