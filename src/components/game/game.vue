@@ -11,7 +11,11 @@ import Player from './player.vue'
 import Cargo from './cargo.vue'
 import { useCargoStore } from '@/store/cargo.ts'
 
-const { cargos } = useCargoStore()
+const { cargos, addCargo, createCargo } = useCargoStore()
+addCargo(createCargo({ x: 3, y: 4 }))
+addCargo(createCargo({ x: 3, y: 2 }))
+addCargo(createCargo({ x: 4, y: 3 }))
+addCargo(createCargo({ x: 2, y: 3 }))
 
 </script>
 
