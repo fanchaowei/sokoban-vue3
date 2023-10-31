@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { usePlayerStore } from '@/store/player'
 import { useMapStore } from '../map'
+import { useCargoStore } from '../cargo'
 
 describe('player', () => {
   beforeEach(() => {
@@ -100,6 +101,78 @@ describe('player', () => {
       movePlayerToDown()
 
       expect(player.y).toBe(1)
+    })
+  })
+
+  describe('撞箱子测试', () => {
+    beforeEach(() => {
+      const { setupMap } = useMapStore()
+      setupMap([
+        [1, 1, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 1, 1, 1, 1, 1, 1],
+      ])
+    })
+
+    it('左边有空位时，人物向左推箱子，箱子和人物都向左移动', () => {
+      const { addCargo, createCargo } = useCargoStore()
+      const cargo = createCargo({ x: 2, y: 1 })
+      addCargo(cargo)
+
+      const { player, movePlayerToLeft } = usePlayerStore()
+      player.x = 3
+      player.y = 1
+
+      movePlayerToLeft()
+
+      expect(player.x).toBe(2)
+      expect(cargo.x).toBe(1)
+    })
+    it('右边有空位时，人物向右推箱子，箱子和人物都向右移动', () => {
+      const { addCargo, createCargo } = useCargoStore()
+      const cargo = createCargo({ x: 4, y: 3 })
+      addCargo(cargo)
+
+      const { player, movePlayerToRight } = usePlayerStore()
+      player.x = 3
+      player.y = 3
+
+      movePlayerToRight()
+
+      expect(player.x).toBe(4)
+      expect(cargo.x).toBe(5)
+    })
+    it('上边有空位时，人物向上推箱子，箱子和人物都向上移动', () => {
+      const { addCargo, createCargo } = useCargoStore()
+      const cargo = createCargo({ x: 3, y: 2 })
+      addCargo(cargo)
+
+      const { player, movePlayerToUp } = usePlayerStore()
+      player.x = 3
+      player.y = 3
+
+      movePlayerToUp()
+
+      expect(player.y).toBe(2)
+      expect(cargo.y).toBe(1)
+    })
+    it('下边有空位时，人物向下推箱子，箱子和人物都向下移动', () => {
+      const { addCargo, createCargo } = useCargoStore()
+      const cargo = createCargo({ x: 3, y: 4 })
+      addCargo(cargo)
+
+      const { player, movePlayerToDown } = usePlayerStore()
+      player.x = 3
+      player.y = 3
+
+      movePlayerToDown()
+
+      expect(player.y).toBe(4)
+      expect(cargo.y).toBe(5)
     })
   })
 })

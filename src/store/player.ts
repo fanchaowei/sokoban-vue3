@@ -1,36 +1,44 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
 import { useMapStore } from './map'
+import { useCargoStore } from './cargo'
 
 export const usePlayerStore = defineStore('player', () => {
 
   const player = reactive({
-    x: 1,
-    y: 1
+    x: 3,
+    y: 3
   })
 
   const { isMoveToWall } = useMapStore()
+  const { findCargo } = useCargoStore()
+
+  function moveMotion(dx: number, dy: number) {
+    const nextPosition = { x: player.x + dx, y: player.y + dy }
+    const isWall = isMoveToWall(nextPosition)
+    if (isWall) return
+
+    const cargo = findCargo(nextPosition)
+    if (cargo) {
+      cargo.x += dx
+      cargo.y += dy
+    }
+
+    player.x += dx
+    player.y += dy
+  }
 
   function movePlayerToLeft() {
-    const isWall = isMoveToWall({ x: player.x - 1, y: player.y })
-    if (isWall) return
-
-    player.x--
+    moveMotion(-1, 0)
   }
   function movePlayerToRight() {
-    const isWall = isMoveToWall({ x: player.x + 1, y: player.y })
-    if (isWall) return
-    player.x++
+    moveMotion(1, 0)
   }
   function movePlayerToUp() {
-    const isWall = isMoveToWall({ x: player.x, y: player.y - 1 })
-    if (isWall) return
-    player.y--
+    moveMotion(0, -1)
   }
   function movePlayerToDown() {
-    const isWall = isMoveToWall({ x: player.x, y: player.y + 1 })
-    if (isWall) return
-    player.y++
+    moveMotion(0, 1)
   }
 
   return {

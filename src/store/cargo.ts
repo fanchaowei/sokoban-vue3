@@ -1,19 +1,32 @@
-import { IPosition } from '@/types'
+import { ICargo, IPosition } from '@/types'
 import { defineStore } from 'pinia'
+import { reactive } from 'vue'
 
 export const useCargoStore = defineStore('cargo', () => {
-  const cargos: IPosition[] = [
-    {
-      x: 2,
-      y: 2
-    },
-    {
-      x: 3,
-      y: 3
-    },
-  ]
+  const cargos: ICargo[] = reactive([])
+
+  function addCargo(cargo: ICargo) {
+    cargos.push(cargo)
+  }
+
+  function createCargo({ x, y }: IPosition): ICargo {
+    return {
+      x,
+      y
+    }
+  }
+
+  function findCargo({ x, y }: IPosition) {
+    const cargo = cargos.find((cargo) => {
+      return cargo.x === x && cargo.y === y
+    })
+    return cargo
+  }
 
   return {
-    cargos
+    cargos,
+    addCargo,
+    createCargo,
+    findCargo
   }
 })
