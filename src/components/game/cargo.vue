@@ -1,26 +1,24 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 export default defineComponent({
-  name: 'Player'
+  name: 'cargo'
 })
 </script>
 
 <script setup lang='ts'>
-import PlayerImg from '@/assets/keeper.png'
-import { usePlayerStore } from '@/store/player.ts'
-import { useMove } from './player/useMove'
+import CargoImg from '@/assets/cargo.png'
 import { usePosition } from '@/composables/usePosition.ts'
+import type { IPosition } from '@/types'
 
-useMove()
+const props = defineProps<IPosition>()
 
-const { player } = usePlayerStore()
-const { position } = usePosition(player)
+const { position } = usePosition(props)
 
 </script>
 
 <template>
   <div class="absolute" :style="position">
-    <img :src="PlayerImg" alt="">
+    <img :src="CargoImg" alt="">
   </div>
 </template>
 
