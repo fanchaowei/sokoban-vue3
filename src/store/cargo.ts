@@ -1,9 +1,12 @@
 import { ICargo, IPosition } from '@/types'
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
+import { useMapStore } from './map'
 
 export const useCargoStore = defineStore('cargo', () => {
   const cargos: ICargo[] = reactive([])
+
+  const { isMoveToWall } = useMapStore()
 
   function addCargo(cargo: ICargo) {
     cargos.push(cargo)
@@ -17,16 +20,26 @@ export const useCargoStore = defineStore('cargo', () => {
   }
 
   function findCargo({ x, y }: IPosition) {
-    const cargo = cargos.find((cargo) => {
-      return cargo.x === x && cargo.y === y
+    const cargo = cargos.find((item) => {
+      return item.x === x && item.y === y
     })
     return cargo
+  }
+
+  function moveCargo(cargo: ICargo, dx: number, dy: number) {
+    const nextPosition = { x: cargo.x + dx, y: cargo.y + dy }
+    if (isMoveToWall(nextPosition)) return false
+    if (findCargo(nextPosition)) return false
+    cargo.x += dx
+    cargo.y += dy
+    return true
   }
 
   return {
     cargos,
     addCargo,
     createCargo,
-    findCargo
+    findCargo,
+    moveCargo
   }
 })
