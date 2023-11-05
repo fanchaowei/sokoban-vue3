@@ -1,4 +1,5 @@
 export interface ICargo {
   x: number,
-  y: number
+  y: number,
+  onTarget: boolean
 }

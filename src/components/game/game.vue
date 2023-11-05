@@ -19,7 +19,9 @@ addCargo(createCargo({ x: 3, y: 2 }))
 addCargo(createCargo({ x: 4, y: 3 }))
 addCargo(createCargo({ x: 2, y: 3 }))
 
-const { targets } = useTargetStore()
+const { addTarget, createTarget, targets } = useTargetStore()
+addTarget(createTarget({ x: 4, y: 4 }))
+addTarget(createTarget({ x: 5, y: 4 }))
 
 </script>
 
@@ -31,7 +33,7 @@ const { targets } = useTargetStore()
     </template>
     <Player></Player>
     <template v-for="cargo in cargos">
-      <Cargo :x="cargo.x" :y="cargo.y"></Cargo>
+      <Cargo :cargo="cargo"></Cargo>
     </template>
   </div>
 </template>

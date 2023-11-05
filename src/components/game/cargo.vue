@@ -7,18 +7,22 @@ export default defineComponent({
 
 <script setup lang='ts'>
 import CargoImg from '@/assets/cargo.png'
+import CargoOnTargetImg from '@/assets/cargo_on_target.png'
 import { usePosition } from '@/composables/usePosition.ts'
-import type { IPosition } from '@/types'
+import type { ICargo } from '@/types'
 
-const props = defineProps<IPosition>()
+interface Props {
+  cargo: ICargo
+}
+const { cargo } = defineProps<Props>()
 
-const { position } = usePosition(props)
+const { position } = usePosition(cargo)
 
 </script>
 
 <template>
   <div class="absolute" :style="position">
-    <img :src="CargoImg" alt="">
+    <img :src="cargo.onTarget ? CargoOnTargetImg : CargoImg" alt="">
   </div>
 </template>
 
