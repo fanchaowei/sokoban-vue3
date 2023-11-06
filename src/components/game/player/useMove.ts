@@ -1,9 +1,11 @@
 import { onMounted, onUnmounted } from 'vue'
 import { usePlayerStore } from "@/store/player"
+import { useGameStore } from '@/store/game'
 
 
 export function useMove() {
   const { movePlayerToLeft, movePlayerToDown, movePlayerToRight, movePlayerToUp } = usePlayerStore()
+  const { detectionGameCompleted } = useGameStore()
 
   function handleKeyUpEvent(e: KeyboardEvent) {
     if (e.key === 'ArrowLeft') {
@@ -15,6 +17,7 @@ export function useMove() {
     } else if (e.key === 'ArrowDown') {
       movePlayerToDown()
     }
+    detectionGameCompleted()
   }
 
   function addKeyUpEvent() {
