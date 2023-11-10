@@ -1,4 +1,4 @@
-import type { ILevelGameData } from '@/types'
+import type { ILevelGameData, IGameData } from '@/types'
 
 export const levelGameData: ILevelGameData = {
   player: {
@@ -35,3 +35,5 @@ export const levelGameData: ILevelGameData = {
     }
   ]
 }
+
+export const gameData: IGameData = [levelGameData]

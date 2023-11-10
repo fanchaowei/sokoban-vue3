@@ -4,7 +4,7 @@ import { useGameStore } from '../game'
 import { useTargetStore } from '../target'
 import { useCargoStore } from '../cargo'
 import { useMapStore } from '../map'
-import { ILevelGameData } from '@/types'
+import { IGameData, ILevelGameData } from '@/types'
 import { usePlayerStore } from '../player'
 
 describe('game', () => {
@@ -56,26 +56,49 @@ describe('game', () => {
   })
   it('setup game', () => {
     const { setupGame } = useGameStore()
-    const levelGameData = getLevelGameData()
-    setupGame(levelGameData)
+    const gameData = getTestGameData()
+    setupGame(gameData)
 
     const { player } = usePlayerStore()
     const { cargos } = useCargoStore()
     const { map } = useMapStore()
     const { targets } = useTargetStore()
 
-    expect(player).toEqual(levelGameData.player)
-    expect(map).toEqual(levelGameData.map)
-    expect(cargos.length).toBe(2)
-    expect(targets.length).toBe(2)
+    expect(player).toEqual(gameData[0].player)
+    expect(map).toEqual(gameData[0].map)
+    expect(cargos.length).toBe(gameData[0].cargos.length)
+    expect(targets.length).toBe(gameData[0].targets.length)
+  })
+  it('to next level', () => {
+    const { setupGame, toNextLevel, game } = useGameStore()
+    const gameData = getTestGameData()
+    setupGame(gameData)
+
+    toNextLevel()
+
+    const { player } = usePlayerStore()
+    const { cargos } = useCargoStore()
+    const { map } = useMapStore()
+    const { targets } = useTargetStore()
+
+    expect(game.level).toBe(2)
+    expect(player).toEqual(gameData[1].player)
+    expect(map).toEqual(gameData[1].map)
+    expect(cargos.length).toBe(gameData[1].cargos.length)
+    expect(targets.length).toBe(gameData[1].targets.length)
+
   })
 })
 
-function getLevelGameData(): ILevelGameData {
+function getTestGameData(): IGameData {
+  return [getTestLevelGameData({ x: 3, y: 3 }), getTestLevelGameData({ x: 1, y: 1 })]
+}
+
+function getTestLevelGameData({ x, y }: { x: number, y: number }): ILevelGameData {
   return {
     player: {
-      x: 3,
-      y: 3,
+      x,
+      y,
     },
     map: [
       [1, 1, 1, 1, 1, 1, 1],

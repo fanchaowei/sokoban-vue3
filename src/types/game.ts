@@ -6,3 +6,5 @@ export interface ILevelGameData {
   cargos: IPosition[]
   targets: IPosition[]
 }
+
+export type IGameData = ILevelGameData[]

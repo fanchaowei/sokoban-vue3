@@ -13,14 +13,17 @@ import Cargo from './cargo.vue'
 import Target from './target.vue'
 import { useCargoStore } from '@/store/cargo.ts'
 import { useTargetStore } from '@/store/target.ts'
-import { levelGameData } from '@/config/gameData.ts'
+import { gameData } from '@/config/gameData.ts'
 
-const { game, setupGame } = useGameStore()
+const { game, setupGame, toNextLevel } = useGameStore()
 const { targets } = useTargetStore()
 const { cargos } = useCargoStore()
 
+setupGame(gameData)
 
-setupGame(levelGameData)
+function handleToNextLevel() {
+  toNextLevel()
+}
 
 </script>
 
@@ -34,7 +37,7 @@ setupGame(levelGameData)
     <template v-for="cargo in cargos">
       <Cargo :cargo="cargo"></Cargo>
     </template>
-    <span class="nextLevelBtn" v-show="game.isGameCompleted">下一关</span>
+    <span class="nextLevelBtn" v-show="game.isGameCompleted" @click="handleToNextLevel">下一关</span>
   </div>
 </template>
 
