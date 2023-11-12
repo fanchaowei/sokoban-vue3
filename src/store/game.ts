@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
 import { useCargoStore } from './cargo'
-import { usePlayerStore } from '@/store/player.ts'
 import { useMapStore } from '@/store/map.ts'
+import { usePlayerStore } from '@/store/player.ts'
 import type { IGameData, ILevelGameData } from '@/types'
 import { useTargetStore } from './target'
 
@@ -12,7 +12,6 @@ interface IGame {
 }
 
 export const useGameStore = defineStore('game', () => {
-
   const game = reactive<IGame>({
     isGameCompleted: false,
     level: 1
@@ -49,6 +48,7 @@ export const useGameStore = defineStore('game', () => {
 
   function toNextLevel() {
     game.level++
+    game.isGameCompleted = false
     resetGame()
     setupGame(_gameData)
   }

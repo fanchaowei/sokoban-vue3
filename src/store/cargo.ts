@@ -4,6 +4,8 @@ import { reactive } from 'vue'
 import { useMapStore } from './map'
 import { useTargetStore } from './target'
 
+let cargoId = 1
+
 export const useCargoStore = defineStore('cargo', () => {
   const cargos: ICargo[] = reactive([])
 
@@ -15,6 +17,7 @@ export const useCargoStore = defineStore('cargo', () => {
 
   function createCargo({ x, y }: IPosition): ICargo {
     return {
+      id: cargoId++,
       x,
       y,
       onTarget: false

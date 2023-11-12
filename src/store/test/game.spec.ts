@@ -86,7 +86,16 @@ describe('game', () => {
     expect(map).toEqual(gameData[1].map)
     expect(cargos.length).toBe(gameData[1].cargos.length)
     expect(targets.length).toBe(gameData[1].targets.length)
+  })
+  it('enter the next level, "the next level" button should disappears', () => {
+    const { toNextLevel, game, setupGame } = useGameStore()
+    const gameData = getTestGameData()
+    setupGame(gameData)
+    game.isGameCompleted = true
 
+    toNextLevel()
+
+    expect(game.isGameCompleted).toBe(false)
   })
 })
 

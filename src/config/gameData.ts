@@ -36,4 +36,40 @@ export const levelGameData: ILevelGameData = {
   ]
 }
 
-export const gameData: IGameData = [levelGameData]
+export const levelGameData2: ILevelGameData = {
+  player: {
+    x: 1,
+    y: 1,
+  },
+  map: [
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 2, 2, 1, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+  ],
+  cargos: [
+    {
+      x: 4,
+      y: 3,
+    },
+    {
+      x: 3,
+      y: 3,
+    }
+  ],
+  targets: [
+    {
+      x: 4,
+      y: 4,
+    },
+    {
+      x: 5,
+      y: 4,
+    }
+  ]
+}
+
+export const gameData: IGameData = [levelGameData, levelGameData2]

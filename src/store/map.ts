@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-
+import { reactive } from 'vue'
 import type { IPosition } from '@/types'
 
 type IMap = MapTile[][]
@@ -10,7 +10,7 @@ export const enum MapTile {
 }
 
 export const useMapStore = defineStore('map', () => {
-  const map: IMap = []
+  const map: IMap = reactive([])
 
   function setupMap(newMap: IMap) {
     map.splice(0, map.length, ...newMap)
