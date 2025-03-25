@@ -5,12 +5,19 @@ import path from 'node:path'
 // https://vitejs.dev/config/
 export default defineConfig({
   test: {
-    environment: "happy-dom",
+    environment: 'happy-dom',
   },
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': `/${path.resolve(__dirname, 'src')}`
-    }
-  }
+      '@': `/${path.resolve(__dirname, 'src')}`,
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "@/style/index.scss";',
+      },
+    },
+  },
 })
