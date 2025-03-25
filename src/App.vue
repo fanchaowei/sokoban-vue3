@@ -1,10 +1,20 @@
-<script setup lang="ts">
-import Game from './components/game/game.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <Game></Game>
+  <router-view></router-view>
 </template>
 
-<style scoped>
+<style lang="css">
+  html {
+    height: 100%;
+  }
+
+  body {
+    height: 100%;
+    margin: 0;
+  }
+
+  #app {
+    height: 100%;
+  }
 </style>

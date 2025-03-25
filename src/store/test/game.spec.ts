@@ -35,7 +35,6 @@ describe('game', () => {
     const { detectionGameCompleted, game } = useGameStore()
     detectionGameCompleted()
     expect(game.isGameCompleted).toBe(true)
-
   })
   it('not game completed', () => {
     const { createTarget, addTarget } = useTargetStore()
@@ -52,7 +51,6 @@ describe('game', () => {
     const { detectionGameCompleted, game } = useGameStore()
     detectionGameCompleted()
     expect(game.isGameCompleted).toBe(false)
-
   })
   it('setup game', () => {
     const { setupGame } = useGameStore()
@@ -100,10 +98,19 @@ describe('game', () => {
 })
 
 function getTestGameData(): IGameData {
-  return [getTestLevelGameData({ x: 3, y: 3 }), getTestLevelGameData({ x: 1, y: 1 })]
+  return [
+    getTestLevelGameData({ x: 3, y: 3 }),
+    getTestLevelGameData({ x: 1, y: 1 }),
+  ]
 }
 
-function getTestLevelGameData({ x, y }: { x: number, y: number }): ILevelGameData {
+function getTestLevelGameData({
+  x,
+  y,
+}: {
+  x: number
+  y: number
+}): ILevelGameData {
   return {
     player: {
       x,
@@ -126,7 +133,7 @@ function getTestLevelGameData({ x, y }: { x: number, y: number }): ILevelGameDat
       {
         x: 2,
         y: 3,
-      }
+      },
     ],
     targets: [
       {
@@ -136,7 +143,7 @@ function getTestLevelGameData({ x, y }: { x: number, y: number }): ILevelGameDat
       {
         x: 5,
         y: 4,
-      }
-    ]
+      },
+    ],
   }
 }

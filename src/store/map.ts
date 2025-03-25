@@ -1,13 +1,7 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
-import type { IPosition } from '@/types'
-
-type IMap = MapTile[][]
-
-export const enum MapTile {
-  WALL = 1,
-  FLOOR = 2
-}
+import { MapTile } from '@/types'
+import type { IMap, IPosition } from '@/types'
 
 export const useMapStore = defineStore('map', () => {
   const map: IMap = reactive([])
@@ -23,6 +17,6 @@ export const useMapStore = defineStore('map', () => {
   return {
     map,
     setupMap,
-    isMoveToWall
+    isMoveToWall,
   }
 })
