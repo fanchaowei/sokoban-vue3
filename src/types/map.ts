@@ -9,3 +9,9 @@ export const enum MapTile {
 }
 
 export type IMap = MapTile[][]
+
+export interface IEditElement {
+  id: MapTile
+  img: string
+  execute: (position: IPosition) => void
+}

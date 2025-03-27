@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
-import type { IMap } from '@/types'
+import type { IMap, IEditElement } from '@/types'
+import { MapTile } from '@/types'
 
 export const useMapEditStore = defineStore('mapEdit', () => {
   const map: IMap = reactive([
@@ -11,5 +12,7 @@ export const useMapEditStore = defineStore('mapEdit', () => {
     [2, 2, 2, 2, 2, 2],
   ])
 
-  return { map }
+  return {
+    map,
+  }
 })

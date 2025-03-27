@@ -8,6 +8,7 @@
 
 <script setup lang="ts">
   import EditGame from '@/components/edit/MapEdit.vue'
+  import EditElementView from '@/components/edit/EditElementView.vue'
 </script>
 
 <template>
@@ -18,7 +19,9 @@
       </div>
       <div class="map__info">数据展示区</div>
     </div>
-    <div class="el-select">元素选择区</div>
+    <div class="el-select">
+      <EditElementView></EditElementView>
+    </div>
   </div>
 </template>
 

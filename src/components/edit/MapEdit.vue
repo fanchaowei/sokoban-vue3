@@ -13,7 +13,11 @@
 
 <template>
   <div v-for="(_, i) in map" class="flex">
-    <div class="border border-white" v-for="(_, j) in map[i]">
+    <div
+      class="border border-white"
+      style="cursor: pointer"
+      v-for="(_, j) in map[i]"
+    >
       <MapBlock :i="i" :j="j" />
     </div>
   </div>
