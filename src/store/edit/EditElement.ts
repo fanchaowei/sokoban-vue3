@@ -3,8 +3,8 @@ import type { IEditElement, IPosition } from '@/types'
 import { useMapEditStore } from './MapEdit'
 import { MapTile } from '@/types'
 import { reactive } from 'vue'
-  import floorImg from '@/assets/floor.png'
-  import wallImg from '@/assets/wall.png'
+import floorImg from '@/assets/floor.png'
+import wallImg from '@/assets/wall.png'
 
 export const wallEditElement: IEditElement = {
   id: MapTile.WALL,
